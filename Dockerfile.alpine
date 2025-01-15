@@ -6,12 +6,14 @@ LABEL maintainer="Roert Loomans <robert@loomans.org>"
 
 # See tinyproxy.conf for better explanation of these values.
 
-# Insert "yes" to disable the Via-header
+# The port which the Tinyproxy service will listen on.
+ENV PORT="8888"
+# Insert any value (preferably "yes") to disable the Via-header:
 ENV DISABLE_VIA_HEADER=""
 # Set this to e.g. tinyproxy.stats to enable stats-page on that address
 ENV STAT_HOST=""
 ENV MAX_CLIENTS=""
-# A space separated list
+# A space separated list. If not set or is empty, all networks are allowed.
 ENV ALLOWED_NETWORKS=""
 # One of Critical, Error, Warning, Notice, Connect, Info
 ENV LOG_LEVEL=""
@@ -28,14 +30,11 @@ ENV AUTH_PASSWORD_FILE="/run/secrets/auth_password"
 
 # Use a custom UID/GID instead of the default system UID which has a greater possibility
 # for collisions with the host and other containers.
-ENV TINYPROXY_UID=57981
-ENV TINYPROXY_GID=57981
+ENV TINYPROXY_UID="57981"
+ENV TINYPROXY_GID="57981"
 
 # Curl is for healthchecks.
-RUN apk add --no-cache \
-      tinyproxy \
-      curl
-
+RUN apk add --no-cache tinyproxy curl
 RUN apk upgrade --no-cache
 
 RUN mv /etc/tinyproxy/tinyproxy.conf /etc/tinyproxy/tinyproxy.default.conf && \
@@ -49,6 +48,8 @@ CMD set -eu; \
     CONFIG='/etc/tinyproxy/tinyproxy.conf'; \
     if [ ! -f "$CONFIG"  ]; then \
         cp /etc/tinyproxy/tinyproxy.default.conf "$CONFIG"; \
+        sed -i "s|^Allow |#Allow |" "$CONFIG"; \
+        [    "$PORT" != "8888" ]                              && sed -i "s|^Port 8888|Port $PORT|" "$CONFIG"; \
         [ -z "$DISABLE_VIA_HEADER" ]                          || sed -i "s|^#DisableViaHeader .*|DisableViaHeader Yes|" "$CONFIG"; \
         [ -z "$STAT_HOST" ]                                   || sed -i "s|^#StatHost .*|StatHost \"${STAT_HOST}\"|" "$CONFIG"; \
         [ -z "$MAX_CLIENTS" ]                                 || sed -i "s|^MaxClients .*|MaxClients $MAX_CLIENTS|" "$CONFIG"; \
