@@ -36,10 +36,10 @@ ENV AUTH_PASSWORD_FILE="/run/secrets/auth_password"
 ENV TINYPROXY_UID="57981"
 ENV TINYPROXY_GID="57981"
 
-# Curl is for healthchecks.
+# Curl is for healthchecks, tzdata is for timezone support (usually already included in Debian).
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-      tinyproxy curl && \
+      tinyproxy curl tzdata && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists
 

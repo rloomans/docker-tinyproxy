@@ -1,7 +1,7 @@
 # Copyright (c) 2018 kalaksi@users.noreply.github.com.
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 
-FROM alpine:3.22.1
+FROM alpine:3.23.2
 LABEL maintainer="kalaksi@users.noreply.github.com"
 
 # See tinyproxy.conf for better explanation of these values.
@@ -33,8 +33,8 @@ ENV AUTH_PASSWORD_FILE="/run/secrets/auth_password"
 ENV TINYPROXY_UID="57981"
 ENV TINYPROXY_GID="57981"
 
-# Curl is for healthchecks.
-RUN apk add --no-cache tinyproxy curl
+# Curl is for healthchecks, tzdata is for timezone support.
+RUN apk add --no-cache tinyproxy curl tzdata
 
 RUN mv /etc/tinyproxy/tinyproxy.conf /etc/tinyproxy/tinyproxy.default.conf && \
     chown -R ${TINYPROXY_UID}:${TINYPROXY_GID} /etc/tinyproxy /var/log/tinyproxy
