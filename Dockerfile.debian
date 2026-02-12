@@ -1,8 +1,8 @@
 # Copyright (c) 2018 kalaksi@users.noreply.github.com.
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 
-FROM debian:bookworm-slim
-LABEL maintainer="kalaksi@users.noreply.github.com"
+FROM debian:trixie-slim
+LABEL maintainer="rloomans@users.noreply.github.com"
 
 # See tinyproxy.conf for better explanation of these values.
 
