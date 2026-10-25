@@ -26,7 +26,7 @@ services:
       # Username for BasicAuth
       # AUTH_USER: ''
       # Password for BasicAuth (letters and digits only)
-      # Prefer secrets-mechanisms instead of environment variables.
+      # Prefer a secret (see AUTH_PASSWORD_FILE below); use this only for quick tests.
       # AUTH_PASSWORD: ''
     # secrets:
     #   - auth_password

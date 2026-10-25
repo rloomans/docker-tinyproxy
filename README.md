@@ -50,6 +50,12 @@ See ```Dockerfile``` and ```docker-compose.yml``` (<https://github.com/rloomans/
 If you need more customization, mount your own tinyproxy.conf to ```/etc/tinyproxy/tinyproxy.conf```,
 otherwise, the default tinyproxy configuration file will be used and customized according to the environment variables.
   
+### Authentication
+
+Set `AUTH_USER` and provide the password as a Docker secret (or any mounted file) at `AUTH_PASSWORD_FILE`, which defaults to `/run/secrets/auth_password`. See the commented `secrets` examples in `docker-compose.yml`.
+`AUTH_PASSWORD` is also supported, but environment variables are visible via `docker inspect` and in the process environment, so use it only for quick tests.
+Note that the password is written in plain text to the generated `/etc/tinyproxy/tinyproxy.conf` inside the container, as tinyproxy cannot read it from a file.
+
 ## Development
 
 ### Contributing
