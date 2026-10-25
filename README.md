@@ -1,10 +1,19 @@
+# rloomans/tinyproxy
+
+Forked from [kalaksi/docker-tinyproxy](https://github.com/kalaksi/docker-tinyproxy)
 
 ## Repositories
-- [GitLab repository](https://gitlab.com/kalaksi-containers/tinyproxy/) (image: `registry.gitlab.com/kalaksi-containers/tinyproxy`)
-- [Docker Hub repository](https://hub.docker.com/r/kalaksi/tinyproxy/) (image: `docker.io/kalaksi/tinyproxy`)
-- [GitHub repository](https://github.com/kalaksi/docker-tinyproxy)
+
+Source:
+
+- [GitHub](https://github.com/kalaksi/docker-tinyproxy)
+
+Images:
+- [Docker Hub](https://hub.docker.com/r/rloomans/tinyproxy/) (image: `docker.io/rloomans/tinyproxy`)
+- [GitHub](https://github.com/rloomans/docker-tinyproxy/pkgs/container/tinyproxy) (image: `ghcr.io/rloomans/tinyproxy`)
 
 ## Why use this container?
+
 **Simply put, this container has been written with simplicity and security in mind.**
 
 Many community containers run unnecessarily with root privileges by default and don't provide help for dropping unneeded CAPabilities either.
@@ -25,23 +34,26 @@ To remedy the situation, these images have been written with security, simplicit
 |Versioned tags            |✅    | Offer versioned tags for stability.|
 
 ## Supported tags
+
 See the ```Tags``` tab on Docker Hub for specifics. Basically you have:
+
 - The default ```latest``` tag that always has the latest changes.
-- Minor versioned tags (follow Semantic Versioning), e.g. ```1.1``` which would follow branch ```1.1.x``` on GitHub.
 
 ## Configuration
-See ```Dockerfile``` and ```docker-compose.yml``` (<https://github.com/kalaksi/docker-tinyproxy>) for usable environment variables. Variables that are left empty will use default values.  
+
+See ```Dockerfile``` and ```docker-compose.yml``` (<https://github.com/rloomans/docker-tinyproxy>) for usable environment variables. Variables that are left empty will use default values.  
 If you need more customization, mount your own tinyproxy.conf to ```/etc/tinyproxy/tinyproxy.conf```,
 otherwise, the default tinyproxy configuration file will be used and customized according to the environment variables.
   
 ## Development
 
 ### Contributing
-See the repository on <https://github.com/kalaksi/docker-tinyproxy>.
-All kinds of contributions are welcome!
+
+See the repository on <https://github.com/rloomans/docker-tinyproxy>.
 
 ## License
-Copyright (c) 2018 kalaksi@users.noreply.github.com. See [LICENSE](https://github.com/kalaksi/docker-tinyproxy/blob/master/LICENSE) for license information.  
+
+Copyright (c) 2018 kalaksi@users.noreply.github.com and Copyright (c) 2026 rloomans@users.noreply.github.com. See [LICENSE](https://github.com/rloomans/docker-tinyproxy/blob/main/LICENSE) for license information.  
 
 As with all Docker images, the built image likely also contains other software which may be under other licenses (such as software from the base distribution, along with any direct or indirect dependencies of the primary software being contained).  
   
