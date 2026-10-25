@@ -38,7 +38,11 @@ To remedy the situation, these images have been written with security, simplicit
 
 See the ```Tags``` tab on Docker Hub for specifics. Basically you have:
 
-- The default ```latest``` tag that always has the latest changes.
+- The default ```latest``` tag that always has the latest changes (Alpine-based, built from ```Dockerfile```).
+- Versioned tags for stability: the release tag, a date-based tag (```YYYY.MM.DD-<run number>```) and a ```sha-<commit>``` tag.
+- The same set of tags prefixed with ```debian-``` (e.g. ```debian-latest```, ```debian-2026.10.25-42```) for the Debian-based image built from ```Dockerfile.debian```.
+
+Images are published to both Docker Hub (```rloomans/tinyproxy```) and GitHub Container Registry (```ghcr.io/rloomans/tinyproxy```).
 
 ## Configuration
 

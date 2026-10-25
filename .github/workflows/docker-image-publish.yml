@@ -27,8 +27,19 @@ env:
 
 jobs:
   push_to_registries:
-    name: Push Docker image to multiple registries
+    name: Push Docker image (${{ matrix.variant }}) to multiple registries
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - variant: default
+            dockerfile: Dockerfile
+            prefix: ''
+          - variant: debian
+            dockerfile: Dockerfile.debian
+            prefix: 'debian-'
 
     permissions:
       packages: write
@@ -72,6 +83,7 @@ jobs:
             ${{ env.GHCR_IMAGE }}
           flavor: |
             latest=auto
+            prefix=${{ matrix.prefix }},onlatest=true
           tags: |
             type=raw,value=latest
             type=ref,event=tag
@@ -85,14 +97,16 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           context: .
+          file: ${{ matrix.dockerfile }}
           push: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=${{ matrix.variant }}
+          cache-to: type=gha,scope=${{ matrix.variant }},mode=max
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           annotations: ${{ steps.meta.outputs.annotations }}
 
       - name: Docker Hub Description
+        if: matrix.variant == 'default'
         uses: peter-evans/dockerhub-description@1b9a80c056b620d92cedb9d9b5a223409c68ddfa # v5.0.0
         with:
           username: ${{ vars.DOCKER_USERNAME }}
