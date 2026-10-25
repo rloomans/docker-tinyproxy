@@ -15,7 +15,7 @@ spec:
         io.kompose.service: tinyproxy
     spec:
       containers:
-      - image: kalaksi/tinyproxy
+      - image: rloomans/tinyproxy
         name: tinyproxy
         ports:
           - containerPort: 8888

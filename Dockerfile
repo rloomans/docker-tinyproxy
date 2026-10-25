@@ -1,8 +1,9 @@
 # Copyright (c) 2018 kalaksi@users.noreply.github.com.
+# Copyright (c) 2026 rloomans@users.noreply.github.com
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 
 FROM alpine:3.24
-LABEL maintainer="Robert Loomans <rloomans@users.noreply.github.com>"
+LABEL maintainer="rloomans@users.noreply.github.com"
 
 # See tinyproxy.conf for better explanation of these values.
 
